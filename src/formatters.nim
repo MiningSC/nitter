@@ -100,6 +100,13 @@ proc getBanner*(banner: string; style=""): string =
 proc getBanner*(user: User; style=""): string =
   getBanner(user.banner, style)
 
+proc escapeHtml(input: string): string =
+  var regex = re"<[^>]+>"
+  return replace(input, regex, "")
+
+proc getBio*(user: User): string =
+  escapeHtml(user.bio)
+
 proc getVideoEmbed*(cfg: Config; id: int64): string =
   &"{getUrlPrefix(cfg)}/i/videos/{id}"
 
@@ -111,7 +118,7 @@ proc pageTitle*(tweet: Tweet): string =
 
 proc pageDesc*(user: User): string =
   if user.bio.len > 0:
-    stripHtml(user.bio)
+    "stripHtml(user.bio)"
   else:
     "The latest tweets from " & user.fullname
 
