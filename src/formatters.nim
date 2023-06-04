@@ -102,7 +102,8 @@ proc getBanner*(user: User; style=""): string =
 
 proc escapeHtml(input: string): string =
   var regex = re"<[^>]+>"
-  return replace(input, regex, "")
+  let inputNoTags = replace(input, regex, "")
+  return inputNoTags.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("\'", "&#39;")
 
 proc getBio*(user: User): string =
   escapeHtml(user.bio)
