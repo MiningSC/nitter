@@ -6,7 +6,7 @@ services:
     image: miningsc/nitter:latest
     container_name: nitter
     ports:
-      - "127.0.0.1:9766:9766" # Replace with "8080:8080" if you don't use a reverse proxy
+      - "9766:8080" # Replace with "8080:8080" if you don't use a reverse proxy
     volumes:
       - ./nitter.conf:/src/nitter.conf:Z,ro
     depends_on:
@@ -25,9 +25,11 @@ services:
       - ALL
 
   nitter-redis:
-    image: redis:6-alpine
+    image: redis:latest
     container_name: nitter-redis
-    command: redis-server --save 60 1 --loglevel warning
+    command: redis-server
+    ports:
+    - "6379:6379"
     volumes:
       - nitter-redis:/data
     restart: unless-stopped
