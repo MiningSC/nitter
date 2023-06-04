@@ -33,7 +33,8 @@ proc timelineRss*(req: Request; cfg: Config; query: Query): Future[Rss] {.async.
       user: User(
         username: name,
         fullname: names.join(" | "),
-        userpic: "https://abs.twimg.com/sticky/default_profile_images/default_profile.png"
+        userpic: "https://abs.twimg.com/sticky/default_profile_images/default_profile.png",
+        banner: ""
       )
     )
 

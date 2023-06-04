@@ -15,7 +15,7 @@ proc parseUser(js: JsonNode; id=""): User =
     location: js{"location"}.getStr,
     bio: js{"description"}.getStr,
     userPic: js{"profile_image_url_https"}.getImageStr.replace("_normal", ""),
-    banner: js.getBanner,
+    banner: js{"profile_image_url_https"}.getImageStr.replace("_normal", ""),
     following: js{"friends_count"}.getInt,
     followers: js{"followers_count"}.getInt,
     tweets: js{"statuses_count"}.getInt,

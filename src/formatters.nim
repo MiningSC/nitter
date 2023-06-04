@@ -94,6 +94,12 @@ proc getUserPic*(userPic: string; style=""): string =
 proc getUserPic*(user: User; style=""): string =
   getUserPic(user.userPic, style)
 
+proc getBanner*(banner: string; style=""): string =
+  banner.replacef(userPicRegex, "$2").replacef(extRegex, style & "$1")
+
+proc getBanner*(user: User; style=""): string =
+  getBanner(user.banner, style)
+
 proc getVideoEmbed*(cfg: Config; id: int64): string =
   &"{getUrlPrefix(cfg)}/i/videos/{id}"
 
