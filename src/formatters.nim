@@ -160,6 +160,13 @@ proc getLink*(tweet: Tweet; focus=true): string =
   result = &"/{username}/status/{tweet.id}"
   if focus: result &= "#m"
 
+proc getUser*(tweet: Tweet; focus=true): string =
+  if tweet.id == 0: return
+  var username = tweet.user.username
+  if username.len == 0:
+    username = "i"
+  result = &"{username}"
+
 proc getTwitterLink*(path: string; params: Table[string, string]): string =
   var
     username = params.getOrDefault("name")
